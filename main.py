@@ -1,5 +1,6 @@
 import openpyxl
 import math
+
 #*****************Replit*******************************
 #import inspect
 #import os
@@ -9,8 +10,23 @@ import math
 #inputx = 'input.xlsx'
 
 #excel_file = os.path.join(ruta_actual, inputx)
-#*****************Replit*******************************
-excel_file = '/home/miguel/Documents/Excel/input.xlsx'
+#************************Replit*************************
+
+#************************Colab**************************
+#from google.colab import files
+
+#uploaded = files.upload()
+
+#excel_file = 'input.xlsx'
+#************************Colab**************************
+
+#************************Linux**************************
+#excel_file = '/home/miguel/Documents/Excel/input.xlsx'
+#************************Linux**************************
+
+#************************Linux**************************
+#excel_file = 'C:/Users/Asus/Documents/Del Angel Calixtro Miguel Angel/input.xlsx'
+#************************Linux**************************
 
 workbook = openpyxl.load_workbook(excel_file)
 
