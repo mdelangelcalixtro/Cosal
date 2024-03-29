@@ -1,13 +1,16 @@
 import openpyxl
-import inspect
-import os
 import math
+#*****************Replit*******************************
+#import inspect
+#import os
 
 #ruta_actual = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 
-inputx = 'input.xlsx'
+#inputx = 'input.xlsx'
 
-excel_file = os.path.join(ruta_actual, inputx)
+#excel_file = os.path.join(ruta_actual, inputx)
+#*****************Replit*******************************
+excel_file = '/home/miguel/Documents/Excel/input.xlsx'
 
 workbook = openpyxl.load_workbook(excel_file)
 
