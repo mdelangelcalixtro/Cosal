@@ -3,7 +3,7 @@ import inspect
 import os
 import math
 
-ruta_actual = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+#ruta_actual = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 
 inputx = 'input.xlsx'
 
