@@ -1,0 +1,1 @@
+1.- No abrir directamente el . XLSX, sino al final de ejectar, descargarlo y abir en escritorio
