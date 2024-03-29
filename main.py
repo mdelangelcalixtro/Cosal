@@ -21,12 +21,16 @@ import math
 #************************Colab**************************
 
 #************************Linux**************************
-#excel_file = '/home/miguel/Documents/Excel/input.xlsx'
+excel_file = '/home/miguel/Documents/Pycharm/Practices/test005'
 #************************Linux**************************
 
 #************************Linux**************************
 #excel_file = 'C:/Users/Asus/Documents/Del Angel Calixtro Miguel Angel/input.xlsx'
 #************************Linux**************************
+
+#************************Android**************************
+#excel_file = '/storage/emulated/0/Documents/Excel/input.xlsx'
+#************************Android**************************
 
 workbook = openpyxl.load_workbook(excel_file)
 
