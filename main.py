@@ -22,11 +22,11 @@ import time
 #************************Colab**************************
 
 #************************Linux**************************
-excel_file = '/home/miguel/Documents/Pycharm/Practices/test005/Cosal/input.xlsx'
+#excel_file = '/home/miguel/Documents/Pycharm/Practices/test005/Cosal/input.xlsx'
 #************************Linux**************************
 
 #************************Linux**************************
-#excel_file = 'C:/Users/Asus/Documents/Del Angel Calixtro Miguel Angel/input.xlsx'
+excel_file = 'C:/Users/under/Documents/Professional_Software/PyCharm/test004/Cosal/input.xlsx'
 #************************Linux**************************
 
 #************************Android**************************
@@ -179,62 +179,36 @@ def main():
             gsr = D_2 - d_2
             mL_3 = mL_2 * 100
             clb = clb / 10
-            #promden = dasdtotal/numcort
-            for i in range(numcort):
-                achs = float(input(f"Ingresa medida {i + 1}: "))
-                #ttlcort = 0
-                dasdtotal = 0
-                for i in range(numcort):
-                    #Se requiera el doble for para sacar la sumatoria de las densidades
-                    #achs = float(input(f"Ingresa medida {i + 1}: "))
-                    gme = ms / (mL_3 * achs)
-                    dsad = gme / clb
-                    dasdtotal += dsad
-                    #ttlcort += achs
+            #***********************************************************************************************************
 
-            promden=dasdtotal/numcort
-            # Lista para guardar valores vol y uw_2  para cada iteracion
-            vol_values = []
+            achs = [float(input(f"Ingresa medida {i + 1}: ")) for i in range(numcort)]
+            promden = sum([ms / (mL_3 * achs[i]) / clb for i in range(numcort)]) / numcort
+
+            # Calculate and print weights
             uw_2_values = []
-
-            # Lazo cerrado para guardar datos en excel
-            ttlcort = 0
+            data = [[' ', 'Medidas', 'Pesos']]
             for i in range(numcort):
-                print("Confirma medidas")
-                achsx = float(input(f"Medida {i + 1}: "))
+                achsx = float(input(f"Confirma medida {i + 1}: "))
                 vol = 2 * math.pi * rd * achsx * gsr
-                #print(f"Volumen {i + 1}: ", vol)
-                #vol_values.append(vol)  Guarda el dato en cada iteracion
                 uw_2 = promden * vol * 10
                 print(f"Peso {i + 1}: ", uw_2)
-                uw_2_values.append(uw_2)  #Guarda el dato en cada iteracion
-                ttlcort += achsx
+                uw_2_values.append(uw_2)
+                data.append([i + 1, achsx, uw_2])
 
-                #Escribe vol y uw_2 a excel
-                for i in range(numcort):
-                    data = [['Pesos']]
-                    for uw_2 in zip(uw_2_values):
-                        data.append(uw_2)
+            # Write data to Excel
 
-                #Escribe todo al final en excel
-                for fila, datos_fila in enumerate(data, start=1):
-                    for columna, valor in enumerate(datos_fila, start=4):
-                        celda = worksheet.cell(row=fila, column=columna)
-                        celda.value = valor
-
-
-            #print("Suma de densidades:", dasdtotal)
-            #print("Promedio densidades:", promden)
-            #print("El ancho total es:", ttlcort)
-            #print("El espesor que se usa en ambos procesos es: ", espr1, "mm")
-            #print("Los metros lineales de cada nuevo rollo son: ", mL_2, "m")
-            print("Bajadas: ", int(uod))
-            datos = ['Bajadas' ], [int(uod)]
-            for fila, datos_fila in enumerate(datos, start=1):
+            for fila, datos_fila in enumerate(data, start=1):
                 for columna, valor in enumerate(datos_fila, start=1):
-                    celda = worksheet.cell(row=columna, column=fila)
+                    celda = worksheet.cell(row=fila, column=columna)
                     celda.value = valor
 
+            # Write "Bajadas" to Excel in a different column
+            bajadas_column = 4  # Specify the column number for "Bajadas"
+            celda = worksheet.cell(row=1, column=bajadas_column)
+            celda.value = "Bajadas"
+            celda = worksheet.cell(row=1, column=bajadas_column + 1)
+            celda.value = int(uod)
+            #***********************************************************************************************************
             workbook.save(excel_file)
 
 
