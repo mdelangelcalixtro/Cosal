@@ -1,5 +1,6 @@
 import openpyxl
 import math
+import time
 
 #*****************Replit*******************************
 #import inspect
@@ -37,9 +38,9 @@ workbook = openpyxl.load_workbook(excel_file)
 worksheet = workbook.active
 def display_menu():
     print("Menu:")
-    print("Opcion 1: Solicitud con medidas iguales")
-    print("Opcion 2: Solicitud con medidas diferentes")
-    print("Opcion 3: Salir del programa")
+    print("Presionar 1: Solicitud con medidas iguales")
+    print("Presionar 2: Solicitud con medidas diferentes")
+    print("Presionar 3: Salir del programa")
 
 def get_user_choice():
     choice = input("Elige la opcion que desees: ")
@@ -94,16 +95,21 @@ def main():
                 return desp
 
 
-            ms = float(input("Rollo principal - Ingresa la masa/peso base (g): "))
-            D_1 = float(input("Rollo principal - Ingresa el diámetro exterior/diámetro (cm): "))
-            d_1 = float(input("Rollo principal - Ingresa el diámetro interior (cm): "))
-            uw_1 = float(input("Rollo principal - Ingresa el peso total del rollo (kg): "))
-            clb = float(input("Rollo principal - Ingresa el calibre/puntos (mm): "))
-            mL_1 = float(input("Rollo principal - Ingresa los metros lineales/longitud (m): "))
-            ach_1 = float(input("Rollo principal - Ingresa el ancho (cm):"))
-            D_2 = float(input("Rollos nuevos - Ingresa el diámetro exterior nuevo (cm): "))
-            d_2 = float(input("Rollos nuevos - Ingresa el diámetro interior nuevo (cm): "))
-            ach_2 = float(input("Rollos nuevos - Ingresa el ancho nuevo (cm): "))
+            ms = float(input("Gramaje (g): "))
+            D_1 = float(input("Diametro original exterior (cm): "))
+            d_1 = float(input("Diametro original interior o Core (in): "))
+            d_1 = d_1*2.54
+            uw_1 = float(input("Peso total del rollo (kg): "))
+            clb = float(input("Puntos (ppt): "))
+            clb = clb*0.0025400
+            mL_1 = float(input("Metros lineales (m): "))
+            ach_1 = float(input("Medida original (cm):"))
+            time.sleep(2)
+            print("Datos que solicita el cliente")
+            D_2 = float(input("Diametro solicitado exterior (cm): "))
+            d_2 = float(input("Diametro solicitado interior o Core (in): "))
+            d_2 = d_2*2.54
+            ach_2 = float(input("Medida que solicita (cm): "))
 
             espr = calcula_espesor(D_1, d_1, mL_1)
             mL_2 = calcula_metros_lineales_nuevos(espr, D_2, d_2)
@@ -113,16 +119,16 @@ def main():
             uw_2, gme, dsad = calcular_peso_nuevo_por_unidad(ms, mL_2, ach_2, clb, vol)
             desp = calcular_desperdicio(uw_2, uoda, uod, uw_1)
 
-            print("El espesor que se usa en ambos procesos es: ", espr, "mm")
-            print("Los metros lineales de cada nuevo rollo son: ", mL_2, "m")
-            print("Unidades obtenidas al desembobinar: ", int(uod), "rollos")
-            print("Unidades obtenidas al dividir por ancho: ", int(uoda), "rollos por corte")
-            print("Volumen del rollo obtenido al final: ", vol, "cm3")
-            print("Peso de cada rollo al final del proceso: ", uw_2, "kg")
-            print("Gramaje por peso entre area nueva: ", gme, "g/cm2")
-            print("Densidad de papel por gramaje entre calibre: ", dsad, "g/cm3")
-            print("Desperdicio de papel por recortes: ", desp, "kg")
-            datos = ['Espesor unitario' ,'Metros lineales' ,'Bajadas', 'Cortes' ,'Volumen unitario' ,'Peso unitario' ,'Gramaje unitario' ,'Densidad unitaria' ,'Desperdicio' ], [espr, mL_2, int(uod), int(uoda), vol, uw_2, gme, dsad , desp], ['mm', 'm', 'unidades', 'unidades', 'cm3', 'kg', 'g/cm2', 'g/cm3' , 'kg']
+            #print("El espesor que se usa en ambos procesos es: ", espr, "mm")
+            #print("Los metros lineales de cada nuevo rollo son: ", mL_2, "m")
+            print("Bajadas: ", int(uod))
+            print("Medidas obtenidas: ", int(uoda))
+            #print("Volumen del rollo obtenido al final: ", vol, "cm3")
+            print("Peso por rollo: ", uw_2, "kg")
+            #print("Gramaje por peso entre area nueva: ", gme, "g/cm2")
+            #print("Densidad de papel por gramaje entre calibre: ", dsad, "g/cm3")
+            #print("Desperdicio de papel por recortes: ", desp, "kg")
+            datos = ['Bajadas', 'Medidas obtenidas','Peso por rollo' ], [int(uod), int(uoda), uw_2], [' ', ' ', 'kg']
             for fila, datos_fila in enumerate(datos, start=1):
                 for columna, valor in enumerate(datos_fila, start=1):
                     celda = worksheet.cell(row=columna, column=fila)
@@ -134,15 +140,20 @@ def main():
 
         elif user_choice == '2':
 
-            numcort = int(input("Numero de cortes que quieres obtener: "))
-            ms = float(input("Rollo principal - Ingresa la masa/peso base (g): "))
-            D_1 = float(input("Rollo principal - Ingresa el diámetro exterior/diámetro (cm): "))
-            d_1 = float(input("Rollo principal - Ingresa el diámetro interior (cm): "))
-            uw_1 = float(input("Rollo principal - Ingresa el peso total del rollo (kg): "))
-            clb = float(input("Rollo principal - Ingresa el calibre/puntos (mm): "))
-            mL_1 = float(input("Rollo principal - Ingresa los metros lineales/longitud (m): "))
-            D_2 = float(input("Rollos nuevos - Ingresa el diámetro exterior nuevo (cm): "))
-            d_2 = float(input("Rollos nuevos - Ingresa el diámetro interior nuevo (cm): "))
+            ms = float(input("Gramaje (g): "))
+            D_1 = float(input("Diametro original exterior (cm): "))
+            d_1 = float(input("Diametro original interior o Core (in): "))
+            d_1 = d_1 * 2.54
+            uw_1 = float(input("Peso total del rollo (kg): "))
+            clb = float(input("Puntos (ppt): "))
+            clb = clb * 0.0025400
+            mL_1 = float(input("Metros lineales (m): "))
+            time.sleep(2)
+            print("Datos que solicita el cliente")
+            numcort = int(input("Numero de medidas que quieres obtener: "))
+            D_2 = float(input("Diametro solicitado exterior (cm): "))
+            d_2 = float(input("Diametro solicitado interior o Core (in): "))
+            d_2 = d_2 * 2.54
 
             #def calcula_espesor(D_1, d_1, mL_1):
             D_1 = D_1 * 10
@@ -170,7 +181,7 @@ def main():
             clb = clb / 10
             #promden = dasdtotal/numcort
             for i in range(numcort):
-                achs = float(input(f"Ingresa medidas para calcular su densidad promedio {i + 1}: "))
+                achs = float(input(f"Ingresa medida {i + 1}: "))
                 #ttlcort = 0
                 dasdtotal = 0
                 for i in range(numcort):
@@ -189,11 +200,11 @@ def main():
             # Lazo cerrado para guardar datos en excel
             ttlcort = 0
             for i in range(numcort):
-                print("Ingresa medidas del cliente.")
+                print("Confirma medidas")
                 achsx = float(input(f"Medida {i + 1}: "))
                 vol = 2 * math.pi * rd * achsx * gsr
-                print(f"Volumen {i + 1}: ", vol)
-                vol_values.append(vol)  #Guarda el dato en cada iteracion
+                #print(f"Volumen {i + 1}: ", vol)
+                #vol_values.append(vol)  Guarda el dato en cada iteracion
                 uw_2 = promden * vol * 10
                 print(f"Peso {i + 1}: ", uw_2)
                 uw_2_values.append(uw_2)  #Guarda el dato en cada iteracion
@@ -201,9 +212,9 @@ def main():
 
                 #Escribe vol y uw_2 a excel
                 for i in range(numcort):
-                    data = [['Volumenes', 'Pesos']]
-                    for vol, uw_2 in zip(vol_values, uw_2_values):
-                        data.append([vol, uw_2])
+                    data = [['Pesos']]
+                    for uw_2 in zip(uw_2_values):
+                        data.append(uw_2)
 
                 #Escribe todo al final en excel
                 for fila, datos_fila in enumerate(data, start=1):
@@ -212,13 +223,13 @@ def main():
                         celda.value = valor
 
 
-            print("Suma de densidades:", dasdtotal)
-            print("Promedio densidades:", promden)
-            print("El ancho total es:", ttlcort)
-            print("El espesor que se usa en ambos procesos es: ", espr1, "mm")
-            print("Los metros lineales de cada nuevo rollo son: ", mL_2, "m")
-            print("Unidades obtenidas al desembobinar: ", int(uod), "rollos")
-            datos = ['S.Densidades' ,'P.ensidades' ,'A.total', 'E.procesos' ,'Ml.uniario' ,'Bajadas' ], [dasdtotal, promden, ttlcort, espr1, mL_2, int(uod)]
+            #print("Suma de densidades:", dasdtotal)
+            #print("Promedio densidades:", promden)
+            #print("El ancho total es:", ttlcort)
+            #print("El espesor que se usa en ambos procesos es: ", espr1, "mm")
+            #print("Los metros lineales de cada nuevo rollo son: ", mL_2, "m")
+            print("Bajadas: ", int(uod))
+            datos = ['Bajadas' ], [int(uod)]
             for fila, datos_fila in enumerate(datos, start=1):
                 for columna, valor in enumerate(datos_fila, start=1):
                     celda = worksheet.cell(row=columna, column=fila)
