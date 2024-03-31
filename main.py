@@ -3,14 +3,14 @@ import math
 import time
 
 #*****************Replit*******************************
-#import inspect
-#import os
+import inspect
+import os
 
-#ruta_actual = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+ruta_actual = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 
-#inputx = 'input.xlsx'
+inputx = 'input.xlsx'
 
-#excel_file = os.path.join(ruta_actual, inputx)
+excel_file = os.path.join(ruta_actual, inputx)
 #************************Replit*************************
 
 #************************Colab**************************
@@ -22,7 +22,7 @@ import time
 #************************Colab**************************
 
 #************************Linux**************************
-excel_file = '/home/miguel/Documents/Pycharm/Practices/test005/Cosal/input.xlsx'
+#excel_file = '/home/miguel/Documents/Pycharm/Practices/test005/Cosal/input.xlsx'
 #************************Linux**************************
 
 #************************Windows**************************
