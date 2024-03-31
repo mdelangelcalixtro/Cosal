@@ -22,12 +22,12 @@ import time
 #************************Colab**************************
 
 #************************Linux**************************
-#excel_file = '/home/miguel/Documents/Pycharm/Practices/test005/Cosal/input.xlsx'
+excel_file = '/home/miguel/Documents/Pycharm/Practices/test005/Cosal/input.xlsx'
 #************************Linux**************************
 
-#************************Linux**************************
-excel_file = 'C:/Users/under/Documents/Professional_Software/PyCharm/test004/Cosal/input.xlsx'
-#************************Linux**************************
+#************************Windows**************************
+#excel_file = 'C:/Users/under/Documents/Professional_Software/PyCharm/test004/Cosal/input.xlsx'
+#************************Windows**************************
 
 #************************Android**************************
 #excel_file = '/storage/emulated/0/Documents/Excel/input.xlsx'
@@ -186,7 +186,7 @@ def main():
 
             # Calculate and print weights
             uw_2_values = []
-            data = [[' ', 'Medidas', 'Pesos']]
+            data = [[' ', 'Medidas (cm)', 'Pesos (kg)']]
             for i in range(numcort):
                 achsx = float(input(f"Confirma medida {i + 1}: "))
                 vol = 2 * math.pi * rd * achsx * gsr
